@@ -1,0 +1,17 @@
+<div class="edit-container">
+    <% if @post && @post.errors.any? %>
+        <div class="edit-error-message">
+            <% @post.errors.full_messages.each do |message| %>
+                <p><%= message %></p>
+            <% end %>
+        </div>
+    <% end %>
+    <div class="edit-inner">
+        <div class="edit-form-body">
+            <%= form_tag("/posts/#{@post.id}/update") do %>
+                <textarea name="content"><%= @post.content %></textarea>
+                <input type="submit" value="変更を保存">
+            <% end %>
+        </div>
+    </div>
+</div>

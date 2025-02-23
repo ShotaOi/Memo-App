@@ -1,0 +1,20 @@
+<div class="new-container">
+    <% if @post && @post.errors.any? %>
+        <div class="new-error-message">
+            <% @post.errors.full_messages.each do |message| %>
+                <p><%= message %></p>
+            <% end %>
+        </div>
+    <% end %>
+    <div class="new-inner">
+        <h1 class="new-form-heading">Memoを追加する</h1>
+        <div class="new-form">
+            <div class="new-form-body">
+                <%= form_tag("/posts/create") do %>
+                    <textarea name="content"><%= @post.content %></textarea>
+                    <input type="submit" value="追加">
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>
