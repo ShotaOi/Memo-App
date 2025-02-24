@@ -1,0 +1,20 @@
+<div class="index-container">
+    <div class="index-inner">
+        <% @posts.each do |post| %>
+            <div class="index-posts-item">
+                <div class="index-post-left">
+                    <img src="<%= "/user_images/#{post.user.image_name}" %>" alt="User Image">
+                </div>
+                <div class="index-post-right">
+                    <div class="index-post-user-name">
+                        <%= link_to(post.user.name, "/users/#{post.user.id}") %>
+                    </div>
+                    <%= link_to(post.content, "/posts/#{post.id}") %>
+                    <div class="index-time">
+                        (<%= post.updated_at.strftime( "%Y-%m-%d" ) %>)
+                    </div>
+                </div>
+            </div>
+        <% end %>
+    </div>
+</div>

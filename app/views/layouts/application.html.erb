@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MemoApp</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+  </head>
+
+  <body>
+    <header id="header">
+      <div id="logo">
+        <% if @current_user %>
+          <%= link_to("MemoApp", "/posts/index") %>
+        <% else %>
+          <%= link_to("MemoApp", "/") %>
+        <% end %>
+      </div>
+      <ul id="nav-list">
+        <% if @current_user %>
+          <li class="nav-list-each">
+            <%= link_to(@current_user.name, "/users/#{@current_user.id}") %>
+          </li>
+          <li class="nav-list-each">
+            <%= link_to("Memo一覧", "/posts/index") %>
+          </li>
+          <li class="nav-list-each">
+            <%= link_to("Memoの追加", "/posts/new") %>
+          </li>
+          <li class="nav-list-each">
+            <%= link_to("ユーザー一覧", "/users/index") %>
+          </li>
+          <li class="nav-list-each">
+            <%= link_to "ログアウト", "/logout", method: :post, data: { confirm: "ログアウトしますか？" } %>
+          </li>
+        <% else %>
+          <li class="nav-list-each">
+            <%= link_to("MemoAppとは", "/about") %>
+          </li>
+          <li class="nav-list-each">
+            <%= link_to("新規登録", "/signup") %>
+          </li>
+          <li class="nav-list-each">
+            <%= link_to("ログイン", "/login") %>
+          </li>
+        <% end %>
+      </ul>
+    </header>
+
+    <main>
+      <% if flash[:notice] %>
+        <div class="flash">
+          <%= flash[:notice] %>
+        </div>
+      <% end %>
+      <%= yield %>
+    </main>
+  </body>
+</html>
